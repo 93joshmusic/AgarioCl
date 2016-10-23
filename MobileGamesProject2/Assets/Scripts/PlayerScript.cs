@@ -12,7 +12,9 @@ public class PlayerScript : MonoBehaviour {
 
     public float speed; //this is speed, duh
 
-    public float magnitude; //this controls how far the player gets thrown if they are too small
+    public float magnitudeHuman; //this controls how far the player gets thrown if they are too small
+
+    public float magnitudeCar;
     
     public Vector3 force; //direction the player is thrown
 
@@ -20,8 +22,8 @@ public class PlayerScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        magnitude = 50f; // change this if you want the player to get hit harder
-
+        magnitudeHuman = 50f; // change this if you want the player to get hit harder
+        magnitudeCar = 100f;
 	
 	}
 	
@@ -80,9 +82,28 @@ public class PlayerScript : MonoBehaviour {
 
                 force.Normalize();
 
-                gameObject.GetComponent<Rigidbody2D>().AddForce(force * magnitude); //applies the force
+                gameObject.GetComponent<Rigidbody2D>().AddForce(force * magnitudeHuman); //applies the force
             }
             
+        }
+
+        else if (col.gameObject.tag == "Car")
+        {
+            if (transform.localScale.magnitude > 5)
+            {
+                transform.localScale += new Vector3(1f, 1f, 1f); //if the player is at least his starting size hitting a human makes him grow
+            }
+            else
+            {
+                transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f); //if hes not he gets smaller, change the floats to change how much smaller
+
+                force = transform.position - col.transform.position; //calculates direction of force
+
+                force.Normalize();
+
+                gameObject.GetComponent<Rigidbody2D>().AddForce(force * magnitudeCar); //applies the force
+            }
+
         }
 
     }
