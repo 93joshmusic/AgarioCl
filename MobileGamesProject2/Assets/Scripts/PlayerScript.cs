@@ -29,7 +29,7 @@ public class PlayerScript : MonoBehaviour {
 	void Update () {
 
 
-
+       
         
 
         //up down left right
