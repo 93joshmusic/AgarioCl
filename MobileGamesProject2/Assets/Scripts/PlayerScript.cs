@@ -31,8 +31,8 @@ public class PlayerScript : MonoBehaviour {
 	void Update () {
 
 
-       
-        
+
+        print(transform.localScale.magnitude);
 
         //up down left right
         if (Input.GetKey(KeyCode.A))
@@ -102,6 +102,20 @@ public class PlayerScript : MonoBehaviour {
                 force.Normalize();
 
                 gameObject.GetComponent<Rigidbody2D>().AddForce(force * magnitudeCar); //applies the force
+            }
+
+        }
+
+        else if (col.gameObject.tag == "Enemy")
+        {
+            if (transform.localScale.magnitude > 7.5)
+            {
+                transform.localScale += new Vector3(3f, 3f, 3f); //if the player is at least his starting size hitting a human makes him grow
+            }
+            else
+            {
+                transform.localScale -= new Vector3(0.3f, 0.3f, 0.3f); //if hes not he gets smaller, change the floats to change how much smaller
+
             }
 
         }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HumanScriptTemp : MonoBehaviour {
+public class CarScriptTemp : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -15,9 +15,11 @@ public class HumanScriptTemp : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if((col.gameObject.tag == "Player")&&(col.gameObject.transform.localScale.magnitude > 1))
+        if ((col.gameObject.tag == "Player") && (col.gameObject.transform.localScale.magnitude > 5))
         {
             Destroy(gameObject);
+
+            print("HEY LISTEN");
 
         }
     }
