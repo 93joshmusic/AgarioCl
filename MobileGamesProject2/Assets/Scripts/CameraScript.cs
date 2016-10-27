@@ -7,9 +7,20 @@ public class CameraScript : MonoBehaviour {
 
     public Camera mainCamera;
 
+	public float targetOrtho;
+
+	public float zoomSpeed;
+
+	public float smoothSpeed;
+
 	// Use this for initialization
 	void Start () {
 
+		targetOrtho = Camera.main.orthographicSize;
+
+		zoomSpeed = 1;
+
+		smoothSpeed = 2;
         
 	
 	}
@@ -17,20 +28,32 @@ public class CameraScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+
+
+
+
         //camera zooms out once the player is a certain size
 
-        if ((player.transform.localScale.magnitude >= 5)&&(player.transform.localScale.magnitude <= 10))
-        {
-            mainCamera.orthographicSize = 10;
+       if ((player.transform.localScale.magnitude >= 5)&&(player.transform.localScale.magnitude <= 10))
+       {
+            targetOrtho = 10;
         }
         else if (player.transform.localScale.magnitude >= 10)
         {
-            mainCamera.orthographicSize = 20;
+			targetOrtho = 20;
         }
         else
         {
-            mainCamera.orthographicSize = 5;
+			targetOrtho = 5;
         }
+
+		ZoomCamera ();
+        
 	
+	}
+
+	void ZoomCamera()
+	{
+		Camera.main.orthographicSize = Mathf.MoveTowards (Camera.main.orthographicSize, targetOrtho, smoothSpeed * Time.deltaTime);
 	}
 }
