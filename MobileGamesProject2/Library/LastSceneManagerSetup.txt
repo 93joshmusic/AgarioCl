@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/WorldScene/TestWorld.unity
+- path: Assets/Gane_level/Game_Level.unity
   isLoaded: 1
   isActive: 1
